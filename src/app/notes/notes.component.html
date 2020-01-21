@@ -1,0 +1,62 @@
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar" *ngIf="sidebar" >
+         <div class="sidebar-header text-center mt-3">
+           <img src="https://slack-files2.s3-us-west-2.amazonaws.com/avatars/2016-02-12/21128668674_17e2774cf7afed4b345e_512.png">
+        </div>
+        <ul class="list-unstyled components" *ngIf="note_list && note_list.length > 0">
+            <ng-container *ngFor="let item of note_list | filter : searchText">
+                    <li (click)="selectNote(item.id)" [ngClass]="selected_note == item.id ? 'active':''" >
+                        <a>
+                            <strong>{{ (item.text.length > 30)? (item.text | slice:0:30)+'..':(item.text)  }}</strong><br>
+                            <span>{{ item.time_stamp}}</span>
+                            <span class="ml-2">{{ item.additional_text.length > 18 ? (item.additional_text | slice:0:18) :(item.additional_text)}}</span>
+                        </a>
+                    </li>
+
+            </ng-container>
+        </ul>
+        <ul class="list-unstyled components" *ngIf="note_list && note_list.length == 0">
+            <li class="p-3">No note has added yet..</li>
+        </ul>
+    </nav>
+
+    <!-- Page Content Holder -->
+    <div id="content" >
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header d-lg-flex d-md-flex">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-primary navbar-btn" (click)="toggleSidebar()">
+                        <i class="fa fa-align-left" aria-hidden="true"></i>
+                        <span>Toggle</span>
+                    </button>
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Create New Note">
+
+                      <button type="button"  class="btn mt-1 mx-3 add-icon" (click)="createNote()">
+                          <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+                      </button>
+                    </span>  
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Delete note">
+
+                      <button type="button"  class="btn mt-1  add-icon" (click)="deleteNote()" *ngIf="note_list && note_list.length >0" >
+                          <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
+                      </button>
+                    </span>  
+                    <form class="form-inline my-2 my-lg-0">
+                      <input class="form-control mr-sm-2" type="search" placeholder="Search." aria-label="Search" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}">
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <div class="row">
+          <div class="col-12">
+            <input type="text" [(ngModel)] = "mainText"  class="w-100 new-outline border-0" placeholder="Enter your notes here...." (input)="sendValue($event)"  (keyup)="processKeyUp($event, focusable)" *ngIf="show_text_area" />
+            <br>
+            <textarea [(ngModel)] = "additionalText"   #focusable rows="5" class="w-100  new-outline border-0" (input)="sendAdditionalValue($event)" ></textarea>
+            <span class="pull-right">{{current_date}}</span>
+          </div>
+
+        </div>
+    </div>
+</div>

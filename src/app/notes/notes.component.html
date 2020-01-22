@@ -51,7 +51,7 @@
         </nav>
         <div class="row">
           <div class="col-12">
-            <input type="text" [(ngModel)] = "mainText"  class="w-100 new-outline border-0" placeholder="Enter your notes here...." (input)="sendValue($event)"  (keyup)="processKeyUp($event, focusable)" *ngIf="show_text_area" />
+            <input type="text" [(ngModel)] = "mainText"  class="w-100 new-outline border-0" placeholder="Enter your notes here...." (input)="sendValue($event)"  (keyup)="processKeyUp($event, focusable)" />
             <br>
             <textarea [(ngModel)] = "additionalText"   #focusable rows="5" class="w-100  new-outline border-0" (input)="sendAdditionalValue($event)" ></textarea>
             <span class="pull-right">{{current_date}}</span>

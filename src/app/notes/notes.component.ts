@@ -25,6 +25,7 @@ export class NotesComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.note_list = JSON.parse(localStorage.getItem('notes'))
   }
 
   // method for adding new note
@@ -40,6 +41,8 @@ export class NotesComponent implements OnInit {
     }
     this.note_list[index]['time_stamp'] = moment(new Date()).format('h:mm a');
     this.changeDetection.detectChanges(); // for detect the changes and reflect in view
+    localStorage.setItem('notes',JSON.stringify(this.note_list))
+
   }
   
   // method for creating an object for a new note
@@ -57,7 +60,7 @@ export class NotesComponent implements OnInit {
     this.selected_id = this.note_id;
     this.selected_note = this.note_id;  //make recently added note as selected
     this.selectNote(this.note_id);
-    localStorage.setItem('notes',this.note_list)
+    localStorage.setItem('notes',JSON.stringify(this.note_list))
     
   }
   // method to toggle sidebar on click of toggle button
@@ -81,9 +84,12 @@ export class NotesComponent implements OnInit {
       this.note_list[index]['additional_text'] = 'No additional text';
     }
     else{
-       this.note_list[index]['additional_text'] = event.target.value;
-    }    this.note_list[index]['time_stamp'] = moment(new Date()).format('h:mm a');
+       this.note_list[index]['additional_text'] = event.target.value;    
+    }    
+    this.note_list[index]['time_stamp'] = moment(new Date()).format('h:mm a');
     this.changeDetection.detectChanges();
+    localStorage.setItem('notes',JSON.stringify(this.note_list))
+
   }
   // move the cursor to the next line on enter press
   processKeyUp(e, el) {
@@ -121,6 +127,8 @@ export class NotesComponent implements OnInit {
   deleteNote(){
     this.note_list = this.note_list.filter(i => i.id !== this.selected_note);
     this.selected_note = this.note_list[0].id //set the last added note as active
+    localStorage.setItem('notes',JSON.stringify(this.note_list))
+
   }
  
 }

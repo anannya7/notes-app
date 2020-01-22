@@ -2,12 +2,7 @@
   "name": "notes-app",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "deploy": "ng build --prod --base-href https://anannya7.github.io/notes-app/ && angular-cli-ghpages --branch gh-pages"
   },
   "private": true,
   "dependencies": {
@@ -47,8 +42,16 @@
     "tslint": "~5.11.0",
     "typescript": "~3.1.6"
   },
-  "scripts": {
-
-   "deploy": "ng build --prod --base-href https://anannya7.github.io/notes-app/ && angular-cli-ghpages --branch gh-pages"
-}
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anannya7/notes-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anannya7/notes-app/issues"
+  },
+  "homepage": "https://github.com/anannya7/notes-app#readme"
 }
